@@ -1,67 +1,88 @@
-const startTimer = (duration) => {
-	let ran = 0;
-	let timer = duration;
-	let breakLength = 60 * 5;
-	let minutes, seconds;
+const timerDiv = document.querySelector(".timer");
 
-	timerDiv.classList.toggle("timer-session");
+const audio = new Audio("http://soundbible.com/grab.php?id=1531&type=mp3");
+let startDate;
+let endDate;
+let pauseDate;
 
-	let timerInterval = setInterval(() => {
-		minutes = parseInt(timer / 60, 10);
-		seconds = parseInt(timer % 60, 10);
+let sessionLength = 25;
+let breakLength = 5;
+let isStarted = false;
+let isPaused = true;
 
-		minutes = minutes < 10 ? "0" + minutes : minutes;
-		seconds = seconds < 10 ? "0" + seconds : seconds;
+let sessionCount = 0;
 
-		document.querySelector(".display").textContent = minutes + ":" + seconds;
+let interval;
 
-		if (!isPaused) {
-			timer--;
+let isBreak = false;
+
+const getRemaining = (time) => {
+	let total = time - new Date().getTime();
+	const seconds = Math.floor((total / 1000) % 60);
+	const minutes = Math.floor((total / 1000 / 60) % 60);
+	const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+
+	return {
+		total,
+		hours,
+		minutes,
+		seconds,
+	};
+};
+
+const startTimer = () => {
+	interval = setInterval(() => {
+		let remaining = getRemaining(endDate);
+
+		if (!isBreak) {
+			timerDiv.classList.toggle("timer-session");
+		} else {
+			timerDiv.classList.remove("timer-session");
+			timerDiv.classList.toggle("timer-break");
 		}
 
-		if (timer < 0) {
-			if (ran === 0) {
-				timerDiv.classList.toggle("timer-break");
-				timerDiv.classList.toggle("timer-session");
+		if (remaining.total > 0 && !isPaused) {
+			document.querySelector(".display").textContent =
+				remaining.minutes + ":" + remaining.seconds;
+		}
 
-				ran++;
-				timer = breakLength;
+		if (remaining.total < 0) {
+			if (isBreak === false) {
+				endDate = new Date(endDate + breakLength * 60000).getTime();
+				isBreak = true;
 			} else {
-				session++;
-
-				clearInterval(timerInterval);
-				timerDiv.classList.toggle("timer-break");
+				clearInterval(interval);
+				isStarted = false;
+				isBreak = false;
 
 				document.querySelector(
 					".display"
-				).textContent = `Session ${session} and break ended.`;
-
-				isStarted = false;
-				isPaused = true;
+				).textContent = `Session ${++sessionCount} and break ended.`;
 			}
+
 			audio.play();
 		}
 	}, 1000);
-
-	return timerInterval;
 };
 
-let audio = new Audio(
-	"https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
-);
-
-const timerDiv = document.querySelector(".timer");
-let session = 0;
-let isStarted = false;
-let isPaused = true;
-let sessionLength = 60 * 25;
-
 document.querySelector("body").addEventListener("click", () => {
-	if (isStarted === false) {
-		startTimer(sessionLength);
-		isStarted = true;
+	if (!isStarted) {
+		startDate = new Date().getTime();
+		endDate = new Date(startDate + sessionLength * 60000).getTime();
+
+		startTimer();
+
+		isStarted = !isStarted;
 	} else {
 		timerDiv.classList.toggle("timer-paused");
+
+		if (isPaused) {
+			endDate = new Date(
+				endDate + (pauseDate - new Date().getTime())
+			).getTime();
+		} else {
+			pauseDate = new Date().getTime();
+		}
 	}
 
 	isPaused = !isPaused;
