@@ -22,7 +22,7 @@ body {
   place-items: center;
   min-height: 100vh;
   font-family: system-ui, sans-serif, monospace;
-  background: #111;
+  background-color: #111;
   color: white;
   margin: 0;
   padding: 0;
@@ -33,13 +33,13 @@ body {
 }
 
 .timer {
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
   text-align: center;
   font-size: 2rem;
-  width: 750px;
-  margin: 0 auto;
   box-shadow: 0 0 9rem rgba(255, 255, 255, 0.2),
     inset 0 0 3rem rgb(0, 0, 0, 0.4);
-  padding: 18rem 1rem;
   border-radius: 50%;
   border: 1px solid #333;
   background-color: #37f5;
@@ -47,11 +47,17 @@ body {
   text-shadow: 1px 0 var(--clr-txt-shadow), -1px 0 var(--clr-txt-shadow),
     0 1px var(--clr-txt-shadow), 0 -1px var(--clr-txt-shadow);
   cursor: pointer;
+  transition: 0.5s;
+}
+
+.timer:hover {
+  box-shadow: 0 0 8rem rgba(255, 255, 255, 0.2),
+    inset 0 0 3rem rgb(0, 0, 0, 0.5);
 }
 
 .timer-session,
 .timer-break,
-.timer-paused{
+.timer-paused {
   transition: 0.5s;
 }
 
