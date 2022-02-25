@@ -1,0 +1,68 @@
+:root {
+  --clr-txt-shadow: #555;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif, monospace;
+  background: #111;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  width: 100%;
+}
+
+.timer {
+  text-align: center;
+  font-size: 2rem;
+  width: 750px;
+  margin: 0 auto;
+  box-shadow: 0 0 9rem rgba(255, 255, 255, 0.2),
+    inset 0 0 3rem rgb(0, 0, 0, 0.4);
+  padding: 18rem 1rem;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background-color: #37f5;
+  user-select: none;
+  text-shadow: 1px 0 var(--clr-txt-shadow), -1px 0 var(--clr-txt-shadow),
+    0 1px var(--clr-txt-shadow), 0 -1px var(--clr-txt-shadow);
+  cursor: pointer;
+}
+
+.timer-session,
+.timer-break,
+.timer-paused{
+  transition: 0.5s;
+}
+
+.timer-session {
+  background-color: #3f75;
+}
+
+.timer-break {
+  background-color: #f7f5;
+}
+
+.timer-paused {
+  background-color: #f737;
+}
