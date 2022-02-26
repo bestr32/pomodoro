@@ -1,6 +1,6 @@
 const timerDiv = document.querySelector(".timer");
 
-const audio = new Audio("http://soundbible.com/grab.php?id=1531&type=mp3");
+const audio = new Audio("https://soundbible.com/grab.php?id=1531&type=mp3");
 let startDate;
 let endDate;
 let pauseDate;
