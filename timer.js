@@ -34,33 +34,37 @@ const startTimer = () => {
 	interval = setInterval(() => {
 		let remaining = getRemaining(endDate);
 
-		if (!isBreak) {
-			timerDiv.classList.toggle("timer-session");
-		} else {
-			timerDiv.classList.remove("timer-session");
-			timerDiv.classList.toggle("timer-break");
-		}
+		if (!isPaused) {
+			if (remaining.total > 0) {
+				document.querySelector(".display").textContent =
+					remaining.minutes + ":" + remaining.seconds;
 
-		if (remaining.total > 0 && !isPaused) {
-			document.querySelector(".display").textContent =
-				remaining.minutes + ":" + remaining.seconds;
-		}
-
-		if (remaining.total < 0) {
-			if (isBreak === false) {
-				endDate = new Date(endDate + breakLength * 60000).getTime();
-				isBreak = true;
-			} else {
-				clearInterval(interval);
-				isStarted = false;
-				isBreak = false;
-
-				document.querySelector(
-					".display"
-				).textContent = `Session ${++sessionCount} and break ended.`;
+				if (!isBreak) {
+					timerDiv.classList.remove("timer-break");
+					timerDiv.classList.toggle("timer-session");
+				} else {
+					timerDiv.classList.remove("timer-session");
+					timerDiv.classList.toggle("timer-break");
+				}
 			}
 
-			audio.play();
+			if (remaining.total < 0) {
+				if (isBreak === false) {
+					endDate = new Date(endDate + breakLength * 60000).getTime();
+					isBreak = true;
+				} else {
+					clearInterval(interval);
+					isStarted = false;
+					isBreak = false;
+					isPaused = true;
+
+					document.querySelector(
+						".display"
+					).textContent = `Session ${++sessionCount} and break ended.`;
+				}
+
+				audio.play();
+			}
 		}
 	}, 1000);
 };
@@ -77,11 +81,9 @@ document.querySelector("body").addEventListener("click", () => {
 		timerDiv.classList.toggle("timer-paused");
 
 		if (isPaused) {
-			endDate = new Date(
-				endDate + (pauseDate - new Date().getTime())
-			).getTime();
+			endDate = new Date(new Date().getTime() + pauseDate).getTime();
 		} else {
-			pauseDate = new Date().getTime();
+			pauseDate = getRemaining(endDate).total;
 		}
 	}
 
