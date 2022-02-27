@@ -1,0 +1,22 @@
+{
+  "name": "pomodorotimer",
+  "version": "1.0.0",
+  "description": "Pomodoro Timer",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bestr32/pomodoro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bestr32/pomodoro/issues"
+  },
+  "homepage": "https://github.com/bestr32/pomodoro#readme",
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
+  }
+}
