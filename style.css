@@ -47,6 +47,7 @@ body {
   border: 1px solid #333;
   background-color: #37f8;
   user-select: none;
+  color: white;
   text-shadow: 1px 0 var(--clr-txt-shadow), -1px 0 var(--clr-txt-shadow),
     0 1px var(--clr-txt-shadow), 0 -1px var(--clr-txt-shadow);
   cursor: pointer;
@@ -54,7 +55,6 @@ body {
 
 .timer h1 {
   font-size: 6vw;
-
 }
 
 .timer:hover {
