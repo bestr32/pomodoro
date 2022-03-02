@@ -27,30 +27,31 @@ button {
 }
 
 body {
+  font-family: system-ui, sans-serif, monospace;
+  margin: 0;
+  padding: 0;
   position: relative;
   display: grid;
   place-items: center;
   min-height: 100vh;
-  font-family: system-ui, sans-serif, monospace;
-  background-color: #111;
   color: white;
-  margin: 0;
-  padding: 0;
+  background-color: #111;
 }
 
 .timer {
   width: 60vw;
   height: 60vw;
-  text-align: center;
   font-size: 2rem;
+  text-align: center;
   box-shadow: 0 0 9rem rgba(255, 255, 255, 0.2),
     inset 0 0 3rem rgb(0, 0, 0, 0.4);
   border-radius: 50%;
   border: 1px solid #333;
-  background-color: #37f8;
   user-select: none;
+  background-color: #37f8;
   text-shadow: 1px 0 var(--clr-txt-shadow), -1px 0 var(--clr-txt-shadow),
     0 1px var(--clr-txt-shadow), 0 -1px var(--clr-txt-shadow);
+  transition: box-shadow 0.5s, background-color 0.5s;
 }
 
 .timer h1 {
@@ -60,13 +61,6 @@ body {
 .timer:hover {
   box-shadow: 0 0 8rem rgba(255, 255, 255, 0.2),
     inset 0 0 3rem rgb(0, 0, 0, 0.5);
-}
-
-.timer,
-.timer-session,
-.timer-break,
-.timer-paused {
-  transition: 0.5s;
 }
 
 .timer-session {
@@ -81,27 +75,35 @@ body {
   background-color: #f738;
 }
 
+.timer-session,
+.timer-break,
+.timer-paused {
+  transition: 0.5s;
+}
+
 .display {
   font-size: 3vw;
 }
 
-.settings {
-  position: absolute;
+.settings,
+.black-out {
   top: 0;
+  position: absolute;
+}
+
+.settings {
   right: 0;
-  background-color: #37fd;
   font-size: 1.125rem;
+  background-color: #37fd;
 }
 
 .black-out {
-  position: absolute;
-  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.6);
   border: 3px solid white;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .settings-container {
@@ -115,13 +117,19 @@ body {
   background-color: #000c;
 }
 
+.form {
+  width: 50%;
+}
+
 .form > input {
   padding: 1rem;
+  width: 90%;
+  min-width: 230px;
 }
 
 .form button {
-  background-color: #37f;
   margin-top: 2rem;
+  background-color: #37f;
 }
 
 .form-header {
@@ -132,9 +140,15 @@ body {
 
 .reset-button {
   position: absolute;
-  background-color: #f73b;
   top: 88%;
   font-size: 1.125rem;
+  background-color: #f73b;
+}
+
+.reset-button,
+.settings,
+.form button {
+  transition: box-shadow 0.5s;
 }
 
 .reset-button,
@@ -150,9 +164,7 @@ body {
 .settings:hover,
 .form button:hover {
   box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.3);
-  transition: 0.5s;
 }
-
 
 @media screen and (min-width: 1024px) {
   .timer {
@@ -163,7 +175,7 @@ body {
 
 @media screen and (min-width: 1280px) {
   .timer {
-    width: 30vw;
-    height: 30vw;
+    width: 35vw;
+    height: 35vw;
   }
 }
