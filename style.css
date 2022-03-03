@@ -24,6 +24,8 @@
 button {
   border: none;
   border-radius: 3px;
+  text-shadow: 1px 0 #0007, -1px 0 #0007, 0 1px #0007, 0 -1px #0007;
+  font-size: 1.125rem;
 }
 
 body {
@@ -39,9 +41,10 @@ body {
 }
 
 .timer {
-  width: 60vw;
-  height: 60vw;
-  font-size: 2rem;
+  /*width: 60vw;
+  height: 60vw;*/
+  width: min(40vw, 800px);
+  height: min(40vw, 800px);
   text-align: center;
   box-shadow: 0 0 9rem rgba(255, 255, 255, 0.2),
     inset 0 0 3rem rgb(0, 0, 0, 0.4);
@@ -55,7 +58,8 @@ body {
 }
 
 .timer h1 {
-  font-size: 6vw;
+  /*font-size: 6vw;*/
+  font-size: clamp(1rem, 5vw, 10vw);
 }
 
 .timer:hover {
@@ -93,7 +97,6 @@ body {
 
 .settings {
   right: 0;
-  font-size: 1.125rem;
   background-color: #37fd;
 }
 
@@ -140,8 +143,7 @@ body {
 
 .reset-button {
   position: absolute;
-  top: 88%;
-  font-size: 1.125rem;
+  bottom: 3%;
   background-color: #f73b;
 }
 
@@ -166,7 +168,7 @@ body {
   box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (min-width: 1024px) {
+/*@media screen and (min-width: 1024px) {
   .timer {
     width: 50vw;
     height: 50vw;
@@ -178,4 +180,4 @@ body {
     width: 35vw;
     height: 35vw;
   }
-}
+}*/
